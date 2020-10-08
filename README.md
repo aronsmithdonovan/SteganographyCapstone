@@ -10,7 +10,7 @@ Add project info here later.
 Setup instructions:
 
   * check that Python is up-to-date
-    * using version 3.9.0, released 10/05/2020
+    * using version 3.8.6, released 09/24/2020
     * check version: `$ python --version`
     * download or update: <a href="https://www.python.org/downloads/release/python-390/">release page here to download the appropriate installer</a> 
  * check that pip is up-to-date
