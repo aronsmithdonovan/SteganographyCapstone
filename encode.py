@@ -1,9 +1,4 @@
 from PIL import Image
-import numpy as np
-import io
-import bitarray
-import base64
-
 
 # Take message input, and image input
 def main():
@@ -68,7 +63,7 @@ def stringToBinary(str):
     res = ' '.join(format(ord(i), 'b') for i in str)
     return res
 
-# Makes it so each char is 8 bits 
+# Makes it so each char is 8 bits
 def appendZeros(binary_data):
     new_data = []
     for str in binary_data:
