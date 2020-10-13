@@ -25,6 +25,10 @@ Setup instructions:
     * using version 7.2.0 <a href="https://pillow.readthedocs.io/en/stable/index.html">(docs)</a>
     * download: `$ pip install Pillow`
     * update: `$ pip install --upgrade Pillow`
+ * download or update the `cryptography` package
+   * using version 3.1.1, released 09/22/2020
+   * download: `$ pip install cryptography`
+   * update: `$ pip install --upgrade cryptography`
 </blockquote>
 <br>
 <br>
