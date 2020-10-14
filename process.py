@@ -1,7 +1,7 @@
 # process.py
 #
 # contains methods for encrypting and decrypting text with a private key
-
+#
 # -------------------------------------------------------------------------------------------
 
 # imports
@@ -11,7 +11,7 @@ import sys
 # -------------------------------------------------------------------------------------------
 
 # main
-### allows use of this file's encryption and decryption methods from the command line
+# allows use of this file's encryption and decryption methods from the command line
 def main():
 
     # running loop
@@ -89,7 +89,7 @@ class EncryptedMessage:
             self.string_encrypted_msg = self.bytes_encrypted_msg.decode('utf-8')
             self.binlist_encrypted_msg = stringToBinaryList(self.string_encrypted_msg)
         elif str(type(message)) == str(type([])):
-            self.bytes_encrypted_msg = encryptMessage(binaryListToString(message))
+            self.bytes_encrypted_msg = encryptMessage(binaryListToString(message), self.key)
             self.string_encrypted_msg = self.bytes_encrypted_msg.decode('utf-8')
             self.binlist_encrypted_msg = stringToBinaryList(self.string_encrypted_msg)
         else:
@@ -129,7 +129,10 @@ class DecryptedMessage:
     def __init__(self, message, key):
         
         # store key
-        self.key = key
+        if str(type(key) == str(type(""))):
+            self.key = bytes(key, 'utf-8')
+        elif str(type(key)) == str(type(b"")):
+            self.key = key
 
         # decrypt message and store decrypted versions
         if str(type(message)) == str(type("")):
@@ -141,7 +144,7 @@ class DecryptedMessage:
             self.string_decrypted_msg = self.bytes_decrypted_msg.decode('utf-8')
             self.binlist_encrypted_msg = stringToBinaryList(self.string_decrypted_msg)
         elif str(type(message)) == str(type([])):
-            self.bytes_decrypted_msg = decryptMessage(binaryListToString(message))
+            self.bytes_decrypted_msg = decryptMessage(binaryListToString(message), self.key)
             self.string_decrypted_msg = self.bytes_decrypted_msg.decode('utf-8')
             self.binlist_decrypted_msg = stringToBinaryList(self.string_decrypted_msg)
         else:
