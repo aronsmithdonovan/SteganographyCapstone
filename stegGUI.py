@@ -32,7 +32,7 @@ class BasicGUI1:
         enterButton.grid(row =2, column =0)
 
         # set up a button as a local variable (doesn't need to be accessed)
-        quitButton = tk.Button(self.rootWin, text="Quit",
+        quitButton = tk.Button(self.rootWin, text="Save and Quit",
                                font="Arial 16", command=self.quit)
         quitButton.grid(row=2, column=1)
 
