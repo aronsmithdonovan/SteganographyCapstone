@@ -1,6 +1,8 @@
 import tkinter as tk
-from encode import *
+from encodeLSB import *
 from tkinter import filedialog
+from PIL import Image
+from pathlib import Path
 
 
 class BasicGUI1:
@@ -49,9 +51,11 @@ class BasicGUI1:
 
     def encode1(self):
 
-        self.filename = filedialog.askopenfilename(initialdir="/", title="Select A File", filetype=
+        self.filepath = filedialog.askopenfilename(initialdir="/", title="Select A File", filetype=
         (("png files", "*.png"), ("all files", "*.*")))
-        main(self.text, self.filename)
+        self.enc_image = call(self.text, self.filepath)
+        self.filename = Path(self.filepath).name
+        self.enc_image.save('encoded_' + str(self.filename))
 
 
     def quit(self):
