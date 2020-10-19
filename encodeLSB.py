@@ -1,4 +1,4 @@
-# encode.py
+# encodeLSB.py
 # 
 # contains methods for encoding a message in an image
 # 

@@ -1,6 +1,6 @@
-# encode.py
+# decodeLSB.py
 # 
-# contains methods for encoding a message in an image
+# contains methods for decoding a message in an image
 # 
 # -------------------------------------------------------------------------------------------
 
