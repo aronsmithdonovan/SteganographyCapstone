@@ -41,12 +41,12 @@ def main():
 
 # -------------------------------------------------------------------------------------------
 
-# call
+# callEncode
 # calls the encode function with internally provided message and image
 ### message: input message string
 ### image_input: filepath for image to be encoded
 ### return: encoded image
-def call(message, image_input):
+def callEncode(message, image_input):
     
     # encrypt message
     encrypted_msg = EncryptedMessage(str(message))
@@ -64,11 +64,9 @@ def call(message, image_input):
     # save encoded image
     enc_image.save('encodedPic.png')
 
-    # display encoded image
-    enc_image.show()
 
     # return statement
-    return enc_image
+    return enc_image, key.decode("utf-8");
 
 # -------------------------------------------------------------------------------------------
 
