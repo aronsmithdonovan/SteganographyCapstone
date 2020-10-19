@@ -11,7 +11,7 @@ from process import *
 # -------------------------------------------------------------------------------------------
 
 # main
-# takes message input and encodes it in an image input
+# uses command line, takes message input and encodes it in an image input
 def main():
     
     # take message input
@@ -41,6 +41,37 @@ def main():
 
 # -------------------------------------------------------------------------------------------
 
+# call
+# calls the encode function with internally provided message and image
+### message: input message string
+### image_input: filepath for image to be encoded
+### return: encoded image
+def call(message, image_input):
+    
+    # encrypt message
+    encrypted_msg = EncryptedMessage(str(message))
+
+    # save key
+    key = encrypted_msg.getKey()
+    
+    # take image input
+    image_file = image_input
+    image = Image.open(image_file, 'r')
+
+    # encode encrypted message in image
+    enc_image = encode(image, encrypted_msg.getBinList())
+
+    # save encoded image
+    enc_image.save('encodedPic.png')
+
+    # display encoded image
+    enc_image.show()
+
+    # return statement
+    return enc_image
+
+# -------------------------------------------------------------------------------------------
+
 # encode
 # encodes a list of binary values into an image with the LSB (least significant bit) approach
 ### image: image object
@@ -49,7 +80,8 @@ def encode(image, data):
     
     # copies input image
     enc_image = image.copy()
-    
+    enc_image = enc_image.convert('RGB')
+
     # sets width and height values
     width, height = enc_image.size
 
@@ -72,7 +104,7 @@ def encode(image, data):
         for count in range(3):
 
             # get RGB values for current pixel
-            r, g, b = pixels[w_index, h_index]
+            r,g,b = pixels[w_index, h_index]
             
             # convert rgb into binary
             r_bit = bin(r)
