@@ -29,6 +29,10 @@ Setup instructions:
    * using version 3.1.1, released 09/22/2020
    * download: `$ pip install cryptography`
    * update: `$ pip install --upgrade cryptography`
+ * download or update the `pyperclip` package
+   * using version 1.8.1, released 10/10/2020
+   * download: `$ pip install pyperclip`
+   * update: `$ pip install --upgrade pyperclip`
 </blockquote>
 <br>
 <br>
