@@ -1,15 +1,16 @@
 from PIL import Image
 
 # Take message input, and image input
-def main():
-    print("Enter the message you would like to encode")
-    message = str(input())
+def main(message, imageFile):
+    # print("Enter the message you would like to encode")
+    # message = str(input())
+
     data = stringToBinary(message).split()
     data = appendZeros(data)
 
     #print("Enter the name of the image file (include extension)")
     #imageFile = input()
-    imageFile = "cat.png"
+    # imageFile = "cat.png"
     image = Image.open(imageFile, 'r')
 
     conceal(image, data)
@@ -56,7 +57,7 @@ def conceal(image, data):
             # save updated pixel
             pixels[index + j, 0] = (int(r_bit, 2), int(g_bit, 2) , int(b_bit, 2))
 
-    encImage.save('encodedCat.png')
+    encImage.save('encodedPic.png')
 
 # converts string to binary string
 def stringToBinary(str):
