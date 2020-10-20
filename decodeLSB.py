@@ -4,6 +4,7 @@
 # 
 # -------------------------------------------------------------------------------------------
 
+# imports
 from PIL import Image
 from process import *
 
@@ -34,7 +35,7 @@ def main():
 # decodes a message encoded in an image using the encode function in encodeLSB.py
 ### image: image with encoded message
 ### key: key used to encode message
-### returns: message as string
+### returns: DecryptedMessage file
 def decode(image, key):
 
     # copies pixel data for input image
@@ -91,6 +92,25 @@ def decode(image, key):
 
     # return message
     return message.getString()
+
+# -------------------------------------------------------------------------------------------
+
+# callDecode
+# calls the encode function with internally provided message and image
+### image_input: filepath for image to be decoded
+### key: encryption key to decode image
+### return: message string
+def callDecode(image_input, key):
+    
+    # initialize arguments
+    key = str(key)
+    image = Image.open(image_input, 'r')
+
+    # decrypt message
+    message = decode(image, key)
+
+    # return
+    return message
 
 # -------------------------------------------------------------------------------------------
 
