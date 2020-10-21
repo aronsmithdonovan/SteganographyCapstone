@@ -17,9 +17,7 @@ def main():
     print("\nProvide the key used to encrypt the message:")
     key = str(input())
 
-    # take image input
-        #print("Enter the name of the image file (include extension)")
-        #image_file = input()
+    # get image
     image_file = "encodedCat.png"
     image = Image.open(image_file, 'r')
 

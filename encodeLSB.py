@@ -26,9 +26,7 @@ def main():
             key.decode('utf-8') + 
             "\n\nSave this key to be able to decrypt your message.")
             
-    # take image input
-        #print("Enter the name of the image file (include extension)")
-        #image_file = input()
+    # get image
     image_file = "cat.png"
     image = Image.open(image_file, 'r')
 
