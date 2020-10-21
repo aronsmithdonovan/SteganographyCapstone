@@ -28,8 +28,6 @@ def main():
     #         "\n\nSave this key to be able to decrypt your message.")
 
     # take image input
-    # print("Enter the name of the image file (include extension)")
-    # image_file = input()
     image_file = "cat.png"
     image = Image.open(image_file, 'r')
 
@@ -44,9 +42,6 @@ def main():
 
     # save encoded image
     enc_image.save('encodedCat.png')
-
-    # display encoded image
-    # enc_image.show()
 
 # ------------------------------------------------------------------------------------------- ############### callEncodeChaos(message, image_input)
 

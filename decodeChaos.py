@@ -17,14 +17,12 @@ def main():
     print("\nProvide the key used to encrypt the message:")
     key = str(input())
 
-    # take image input
-    # print("Enter the name of the image file (include extension)")
-    # image_file = input()
+    # get image
     image_file = "encodedCat.png"
     image = Image.open(image_file, 'r')
 
     # decode message from image with key
-    message = decode(image, key, edge_pix)
+    message = decode(image, key)
 
     # print decoded message
     print("\nYour decoded message is: " + message)
