@@ -39,9 +39,9 @@ def main():
     # display encoded image
     enc_image.show()
 
-# ------------------------------------------------------------------------------------------- ############### callEncode(message, image_input)
+# ------------------------------------------------------------------------------------------- ############### callEncodeLSB(message, image_input)
 
-# callEncode
+# callEncodeLSB
 # calls the encode function with internally provided message and image
 ### message: input message string
 ### image_input: filepath for image to be encoded
