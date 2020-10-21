@@ -98,7 +98,7 @@ def decode(image, key):
 
     # decrypt message
     message = DecryptedMessage(bin_list, key)
-
+    # print(message.getString)
 
 
     # return message

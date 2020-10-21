@@ -33,6 +33,10 @@ Setup instructions:
    * using version 1.8.1, released 10/10/2020
    * download: `$ pip install pyperclip`
    * update: `$ pip install --upgrade pyperclip`
+ * download or update the `cv2` package
+   * using version 4.4.0.44, released 09/22/2020
+   * download: `$ pip install opencv-python`
+   * update: `$ pip install --upgrade opencv-python`
 </blockquote>
 <br>
 <br>
