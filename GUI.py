@@ -192,7 +192,7 @@ class GUI:
 
         # saves key to .txt file
         self.outputSaveButton = tk.Button(self.keyFrame,
-                                        text="Save key to .txt file (recommended)",
+                                        text="Download key as .txt file (recommended)",
                                         font="Arial 12",
                                         fg="black",
                                         bg="white")
@@ -324,11 +324,13 @@ class GUI:
             self.keyReturn.pack(fill=tk.X, side=tk.LEFT)
 
             # config save key to .txt file
-            self.outputSaveButton.config(text="Save key as .txt file (recommended)")
+            self.outputSaveButton.config(text="Download key as .txt file (recommended)")
+            self.outputSaveButton.pack_forget()
 
             # -------------------------------------------------------------------------------------------
             
-            # config select image file button
+            # config image file button
+            self.imgUploadButton.config(text="Upload image file", command= self.imageFileProcess)
             self.imgUploadButton.pack(fill=tk.X, side=tk.RIGHT)
 
             # config image filepath label
@@ -409,11 +411,13 @@ class GUI:
             self.keyReturn.pack(fill=tk.X, side=tk.LEFT)
 
             # config save message as .txt file
-            self.outputSaveButton.config(text="Save message as .txt file")
+            self.outputSaveButton.config(text="Download message as .txt file")
+            self.outputSaveButton.pack_forget()
 
             # -------------------------------------------------------------------------------------------
             
-            # config select image file button
+            # config image file button
+            self.imgUploadButton.config(text="Upload image file", command= self.imageFileProcess)
             self.imgUploadButton.pack(fill=tk.X, side=tk.RIGHT)
 
             # config image filepath label
@@ -477,6 +481,10 @@ class GUI:
             self.toggleMethodLabel.config(text=self.LSB_STATE, bg=self.LSB_COLOR)
             self.toggleMethodLabel.pack(fill=tk.Y, side=tk.LEFT)
 
+            # config image button
+            self.imgUploadButton.config(text="Upload image file", command= self.imageFileProcess)
+            self.imgUploadButton.pack(fill=tk.X, side=tk.RIGHT)
+
         elif self.toggleMethodState == self.CHAOS_STATE: ######################################### IF IN CHAOS MODE...
             
             # config method toggle button
@@ -485,6 +493,10 @@ class GUI:
             # config method toggle label
             self.toggleMethodLabel.config(text=self.CHAOS_STATE, bg=self.CHAOS_COLOR)
             self.toggleMethodLabel.pack(fill=tk.Y, side=tk.LEFT)
+
+            # config image button
+            self.imgUploadButton.config(text="Upload image file", command= self.imageFileProcess)
+            self.imgUploadButton.pack(fill=tk.X, side=tk.RIGHT)
 
         else:
             self.quit
@@ -512,19 +524,20 @@ class GUI:
         self.enc_filepath = (str(Path(self.filepath).parent) + 
                                 "\\" + str(self.enc_filename))
         
-        # save the encoded image
-        self.enc_image.save(self.enc_filepath)
+        # update image button
+        self.imgUploadButton.config(text="Download encoded image file", command= self.imageFileDownload)
+        self.imgUploadButton.pack(fill=tk.X, side=tk.RIGHT)
 
         # display the filepath on the label
         self.imgFileLabel.config(text=self.enc_filepath)
         self.imgFileLabel.pack(fill=tk.X, side=tk.LEFT)
 
         # display the encoded image
-        load = Image.open(self.enc_filepath)
-        render = ImageTk.PhotoImage(load)
-        self.imageBox.config(image=render)
-        self.imageBox.image = render
-        self.imageBox.pack()
+        # load = Image.open(self.enc_filepath)
+        # render = ImageTk.PhotoImage(load)
+        # self.imageBox.config(image=render)
+        # self.imageBox.image = render
+        # self.imageBox.pack()
 
         # display the encryption key
         self.keyReturn.config(text=(str(self.enc_key)[0:25] + "..."), font="Arial 12 bold", fg="black") 
@@ -606,6 +619,20 @@ class GUI:
         self.imageBox.image = render
         self.imageBox.pack()
 
+    # ------------------------------------------------------------------------------------------- ############### imageFileDownload(self)
+
+    def imageFileDownload(self):
+        
+        if path.exists(self.enc_filepath):
+            self.enc_filepath = str(str(Path(self.enc_filepath).parent) + "\\" + str(Path(self.enc_filepath).stem) + "-" + str(self.rand) + ".png")
+        
+        # save image to filepath
+        self.enc_image.save(self.enc_filepath)
+
+        # config image button
+        self.imgUploadButton.config(text="Saved!", command= self.imageFileProcess)
+        self.imgUploadButton.pack(fill=tk.X, side=tk.RIGHT)
+
     # ------------------------------------------------------------------------------------------- ############### stringToTxt(self)
 
     # saves string as .txt file
@@ -616,8 +643,8 @@ class GUI:
 
         # rename if duplicate
         if path.exists(self.txt_filepath):
-            self.txt_filepath = str(Path(self.filepath).parent + Path(self.txt_filepath).stem + str(self.rand) + ".txt")
-
+            self.txt_filepath = str(str(Path(self.filepath).parent) + "\\" + str(Path(self.txt_filepath).stem) + "-" + str(self.rand) + ".txt")
+        
         # write text file
         file = open(self.txt_filepath, "x+")
         file.write(self.txt_string)
