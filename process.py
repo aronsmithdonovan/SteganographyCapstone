@@ -8,7 +8,7 @@
 from cryptography.fernet import Fernet
 import sys
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### main()
 
 # main
 # allows use of this file's encryption and decryption methods from the command line
@@ -17,7 +17,8 @@ def main():
     # running loop
     while True:
         # prompt to either encrypt or decrypt
-        print("\nWould you like to encrypt a message or decrypt a message?\nPlease type E for encrypt and D for decrypt, or type QUIT to quit.")
+        print("\nWould you like to encrypt a message or decrypt a message?" +
+                "\nPlease type E for encrypt and D for decrypt, or type QUIT to quit.")
         encrypt_or_decrypt = str(input())
         
         # if encrypt...
@@ -31,7 +32,9 @@ def main():
 
             # prints key
             key = encrypted_message.getKey()
-            print("\nGenerating key...\n\nYour generated key is:\n" + key.decode('utf-8') + "\n\nSave this key to be able to decrypt your message.")
+            print("\nGenerating key...\n\nYour generated key is:\n" + 
+                    key.decode('utf-8') + 
+                    "\n\nSave this key to be able to decrypt your message.")
             
             # prints encrypted message
             print("\nYour encrypted message is:\n" + encrypted_message.getString())
@@ -61,7 +64,7 @@ def main():
         else:
             continue
         
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### EncryptedMessage
 
 # EncryptedMessage
 # encrypts a provided message and stores it as a string, bytes, and a list of binary values
@@ -113,7 +116,7 @@ class EncryptedMessage:
     def getBinList(self):
         return self.binlist_encrypted_msg
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### DecryptedMessage
     
 # DecryptedMessage
 # decrypts a provided message and stores it as
@@ -168,7 +171,7 @@ class DecryptedMessage:
     def getBinList(self):
         return self.binlist_decrypted_msg
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### encryptMessage(message, key)
 
 # encryptMessage
 ### message: string to be encrypted
@@ -189,7 +192,7 @@ def encryptMessage(message, key):
     # return encrypted message
     return encrypted_msg
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### decryptMessage(message, key)
 
 # decryptMessage
 ### message: string to be decrypted
@@ -210,7 +213,7 @@ def decryptMessage(message, key):
     # return decrypted message
     return decrypted_msg
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### cleanMessage(message)
 
 # cleanMessage
 # sanitizes a string OR terminates program if unacceptable characters are found in string
@@ -254,7 +257,7 @@ def cleanMessage(message):
     # return sanitized message
     return sani_message
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### appendZeroes(binary_list)
 
 
 # makes each item in a list of binary values 8 bits long
@@ -266,7 +269,7 @@ def appendZeroes(binary_list):
         binary_char_list.append(str)
     return binary_char_list
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### stringToBinaryList(string)
 
 # converts string to a list of binary
 def stringToBinaryList(string):
@@ -275,7 +278,7 @@ def stringToBinaryList(string):
     binary_char_list = appendZeroes(binary_list)
     return binary_char_list
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### binaryListToString(binary_list)
 
 # converts a list of binary values to an ASCII string
 def binaryListToString(binary_list):
@@ -291,3 +294,7 @@ def binaryListToString(binary_list):
 # call main fxn
 if __name__ == '__main__':
     main()    
+
+# -------------------------------------------------------------------------------------------
+
+# end of file

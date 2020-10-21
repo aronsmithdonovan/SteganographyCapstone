@@ -22,7 +22,9 @@ def main():
 
     # print key
     key = encrypted_msg.getKey()
-    print("\nYour generated key is:\n" + key.decode('utf-8') + "\n\nSave this key to be able to decrypt your message.")
+    print("\nYour generated key is:\n" + 
+            key.decode('utf-8') + 
+            "\n\nSave this key to be able to decrypt your message.")
             
     # take image input
         #print("Enter the name of the image file (include extension)")
@@ -46,7 +48,7 @@ def main():
 ### message: input message string
 ### image_input: filepath for image to be encoded
 ### return: encoded image
-def callEncode(message, image_input):
+def callEncodeLSB(message, image_input):
     
     # encrypt message
     encrypted_msg = EncryptedMessage(str(message))
@@ -61,10 +63,6 @@ def callEncode(message, image_input):
     # encode encrypted message in image
     enc_image = encode(image, encrypted_msg.getBinList())
 
-    # save encoded image
-    enc_image.save('encodedPic.png')
-
-
     # return statement
     return enc_image, key.decode("utf-8");
 
@@ -73,7 +71,7 @@ def callEncode(message, image_input):
 # encode
 # encodes a list of binary values into an image with the LSB (least significant bit) approach
 ### image: image object
-### bin_list: list of binary values to encode into an image
+### data: list of binary values to encode into an image
 def encode(image, data):
     
     # copies input image

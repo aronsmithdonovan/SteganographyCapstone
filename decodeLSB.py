@@ -8,7 +8,7 @@
 from PIL import Image
 from process import *
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### main()
 
 # main
 def main():
@@ -29,7 +29,26 @@ def main():
     # print decoded message
     print("\nYour decoded message is: " + message)
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### callDecodeLSB(image_input, key)
+
+# callDecodeLSB
+# calls the encode function with internally provided message and image
+### image_input: filepath for image to be decoded
+### key: encryption key to decode image
+### return: message string
+def callDecodeLSB(image_input, key):
+    
+    # initialize arguments
+    key = str(key)
+    image = Image.open(image_input, 'r')
+
+    # decrypt message
+    message = decode(image, key)
+
+    # return statement
+    return message
+
+# ------------------------------------------------------------------------------------------- ############### decode(image, key)
 
 # decode
 # decodes a message encoded in an image using the encode function in encodeLSB.py
@@ -95,25 +114,10 @@ def decode(image, key):
 
 # -------------------------------------------------------------------------------------------
 
-# callDecode
-# calls the encode function with internally provided message and image
-### image_input: filepath for image to be decoded
-### key: encryption key to decode image
-### return: message string
-def callDecode(image_input, key):
-    
-    # initialize arguments
-    key = str(key)
-    image = Image.open(image_input, 'r')
-
-    # decrypt message
-    message = decode(image, key)
-
-    # return
-    return message
-
-# -------------------------------------------------------------------------------------------
-
 # call main fxn
 if __name__ == '__main__' :
     main()
+
+# -------------------------------------------------------------------------------------------
+
+# end of file
