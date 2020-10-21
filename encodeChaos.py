@@ -12,15 +12,23 @@ import cv2 as cv
 
 # -------------------------------------------------------------------------------------------
 
+# converts string to a list of binary
+def stringToBinaryList(string):
+    binary_string = ' '.join(format(ord(i), 'b') for i in string)
+    binary_list = binary_string.split()
+    binary_char_list = appendZeroes(binary_list)
+    return binary_char_list
+
+# -------------------------------------------------------------------------------------------
+
 # main
 # uses command line, takes message input and encodes it in an image input
 def main():
     # take message input
     print("\nEnter the message to encode:")
 
-    # encrypt message @Aron
+    # encrypt message
     encrypted_msg = EncryptedMessage(str(input()))
-    #print(encrypted_msg.getString())
 
     # print key
     key = encrypted_msg.getKey()
@@ -32,7 +40,7 @@ def main():
     image_file = "cat.png"
     image = Image.open(image_file, 'r')
 
-    # encode encrypted message in image @Aron
+    # encode encrypted message in image
     enc_image = encodeChaos(image, encrypted_msg.getBinList())
 
     # save encoded image
@@ -53,8 +61,6 @@ def encodeChaos(image, data):
     # copies input image, convert to RGB
     enc_image = image.copy()
     enc_image = enc_image.convert('RGB')
-
-    #print(data)
 
     msg = data
     data = ''
@@ -92,6 +98,7 @@ def encodeChaos(image, data):
         g_bit = bin(g)
         b_bit = bin(b)
 
+        # encode as outlined in Roy et al paper
         a1 = int(r_bit[len(r_bit)-1])
         a2 = int(g_bit[len(g_bit)-1])
         a3 = int(b_bit[len(b_bit)-1])

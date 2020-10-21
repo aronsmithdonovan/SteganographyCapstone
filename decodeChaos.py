@@ -71,6 +71,7 @@ def decode(image, key):
         g_bit = bin(g)
         b_bit = bin(b)
 
+        # decode as outlined in Roy et al. paper
         a1 = int(r_bit[len(r_bit) - 1])
         a2 = int(g_bit[len(g_bit) - 1])
         a3 = int(b_bit[len(b_bit) - 1])
@@ -94,9 +95,8 @@ def decode(image, key):
     for i in range(int(len(message)/8)):
         bin_list.append(message[8*i : 8*i + 8])
 
-    #print(bin_list)
 
-    # decrypt message @Aron
+    # decrypt message
     message = DecryptedMessage(bin_list, key)
 
 
