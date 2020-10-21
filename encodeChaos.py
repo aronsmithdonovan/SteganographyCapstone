@@ -10,16 +10,7 @@ from numpy import *
 from process import *
 import cv2 as cv
 
-# -------------------------------------------------------------------------------------------
-
-# converts string to a list of binary
-def stringToBinaryList(string):
-    binary_string = ' '.join(format(ord(i), 'b') for i in string)
-    binary_list = binary_string.split()
-    binary_char_list = appendZeroes(binary_list)
-    return binary_char_list
-
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### main()
 
 # main
 # uses command line, takes message input and encodes it in an image input
@@ -32,7 +23,9 @@ def main():
 
     # print key
     key = encrypted_msg.getKey()
-    print("\nYour generated key is:\n" + key.decode('utf-8') + "\n\nSave this key to be able to decrypt your message.")
+    print("\nYour generated key is:\n" + 
+            key.decode('utf-8') + 
+            "\n\nSave this key to be able to decrypt your message.")
 
     # take image input
     # print("Enter the name of the image file (include extension)")
@@ -41,7 +34,7 @@ def main():
     image = Image.open(image_file, 'r')
 
     # encode encrypted message in image
-    enc_image = encodeChaos(image, encrypted_msg.getBinList())
+    enc_image = encode(image, encrypted_msg.getBinList())
 
     # save encoded image
     enc_image.save('encodedCat.png')
@@ -49,19 +42,45 @@ def main():
     # display encoded image
     enc_image.show()
 
+# ------------------------------------------------------------------------------------------- ############### callEncodeChaos(message, image_input)
 
-# -------------------------------------------------------------------------------------------
+# callEncodeChaos
+### message: input message string
+### image_input: filepath for image to be encoded
+### return: encoded image
+def callEncodeChaos(message, image_input):
 
-# encodeChaos
+    # encrypt message
+    encrypted_msg = EncryptedMessage(str(message))
+
+    # save key
+    key = encrypted_msg.getKey()
+
+    # take image input
+    image_file = image_input
+    image = Image.open(image_file, 'r')
+
+    # encode encrypted message in image
+    enc_image = encode(image, encrypted_msg.getBinList())
+
+    # return statement
+    return enc_image, key.decode("utf-8")
+
+# ------------------------------------------------------------------------------------------- ############### encode(image, data)
+
+# encode
 # encodes a list of binary values into the edge pixels of an image using Canny edge detection
 # uses half as many pixels as LSB
 ### image: image object
-
-def encodeChaos(image, data):
+### data: list of binary values to be encoded into an image
+### return: encoded image
+def encode(image, data):
+    
     # copies input image, convert to RGB
     enc_image = image.copy()
     enc_image = enc_image.convert('RGB')
 
+    # initialize arguments
     msg = data
     data = ''
 
@@ -75,7 +94,7 @@ def encodeChaos(image, data):
     pixnum = int(len(data)/2)
 
     #selects edge pix for encodeding, adds to list
-    edges = cv.Canny(cv.imread('cat.png',0),100,200) #SHOULD BE IMAGE OR ENC_IMAGE AS PARAM -- Still need to resolve later
+    edges = cv.Canny(cv.imread('cat.png',0),100,200) # TODO: SHOULD BE IMAGE OR ENC_IMAGE AS PARAM -- Still need to resolve later
     edge_pix = []
     for i in range(edges.shape[0]):
         for j in range(edges.shape[1]):
@@ -131,7 +150,6 @@ def encodeChaos(image, data):
 if __name__ == '__main__' :
     main()
 
+# -------------------------------------------------------------------------------------------
 
-
-
-
+# end of file
