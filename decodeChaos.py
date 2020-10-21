@@ -9,11 +9,7 @@ from PIL import Image
 from process import *
 import cv2 as cv
 
-# -------------------------------------------------------------------------------------------
-
-
-
-
+# ------------------------------------------------------------------------------------------- ############### main()
 
 # main
 def main():
@@ -33,8 +29,26 @@ def main():
     # print decoded message
     print("\nYour decoded message is: " + message)
 
+# ------------------------------------------------------------------------------------------- ############### callDecodeChaos(image_input, key)
 
-# -------------------------------------------------------------------------------------------
+# callDecodeChaos
+# calls the decode function with internally provided message and image
+### image_input: filepath for image to be decoded
+### key: encryption key to decode image
+### return: message string
+def callDecodeChaos(image_input, key):
+
+    # initialize arguments
+    key = str(key)
+    image = Image.open(image_input, 'r')
+
+    # decrypt message
+    message = decode(image, key)
+
+    # return statement
+    return message
+
+# ------------------------------------------------------------------------------------------- ############### decode(image, key)
 
 # decode
 # decodes a message encoded in an image using the encode function in encodeLSB.py
@@ -47,7 +61,7 @@ def decode(image, key):
     image = image.convert('RGB')
     pixels = image.load()
 
-    edges = cv.Canny(cv.imread('cat.png', 0), 100, 200)  # SHOULD BE IMAGE OR ENC_IMAGE AS PARAM -- still need to resolve later
+    edges = cv.Canny(cv.imread('cat.png', 0), 100, 200)  # TODO: SHOULD BE IMAGE OR ENC_IMAGE AS PARAM -- still need to resolve later
 
     edge_pix = []
 
@@ -109,3 +123,7 @@ def decode(image, key):
 # call main fxn
 if __name__ == '__main__' :
     main()
+
+# -------------------------------------------------------------------------------------------
+
+# end of file
