@@ -18,9 +18,8 @@ def main():
     # take message input
     print("\nEnter the message to encode:")
 
-    # encrypt message @Aron
+    # encrypt message
     encrypted_msg = EncryptedMessage(str(input()))
-    #print(encrypted_msg.getString())
 
     # print key
     key = encrypted_msg.getKey()
@@ -32,7 +31,7 @@ def main():
     image_file = "cat.png"
     image = Image.open(image_file, 'r')
 
-    # encode encrypted message in image @Aron
+    # encode encrypted message in image
     enc_image = encodeChaos(image, encrypted_msg.getBinList())
 
     # save encoded image
