@@ -27,7 +27,8 @@ def main():
     message = decode(image, key)
 
     # print decoded message
-    print("\nYour decoded message is: " + message)
+    print("\nYour decoded message is: " + 
+            message)
 
 # ------------------------------------------------------------------------------------------- ############### callDecodeLSB(image_input, key)
 

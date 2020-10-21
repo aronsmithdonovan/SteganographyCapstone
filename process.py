@@ -37,7 +37,8 @@ def main():
                     "\n\nSave this key to be able to decrypt your message.")
             
             # prints encrypted message
-            print("\nYour encrypted message is:\n" + encrypted_message.getString())
+            print("\nYour encrypted message is:\n" + 
+                    encrypted_message.getString())
         
         # if decrypt...
         elif encrypt_or_decrypt == "D":
@@ -53,7 +54,8 @@ def main():
             decrypted_message = DecryptedMessage(message, key)
 
             # prints decrypted message
-            print("\nYour decrypted message is:\n" + decrypted_message.getString())
+            print("\nYour decrypted message is:\n" + 
+                    decrypted_message.getString())
 
         # if quit...
         elif encrypt_or_decrypt == "QUIT":
