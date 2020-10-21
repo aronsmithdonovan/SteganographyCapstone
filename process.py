@@ -235,7 +235,7 @@ def cleanMessage(message):
     sani_list = []
     for index in range(0, len(ascii_list)):
         # check for unacceptable characters
-        if 31 > ascii_list[index] >= 0 or ascii_list[index] >= 127:
+        if ascii_list[index] >= 176 or 31 >= ascii_list[index] >= 16 or ascii_list[index] == 12 or 8 >= ascii_list[index] >= 0:
             print("\nunacceptable character found in input.\nterminating program...")
             sys.exit()
         # adds \ before characters that need to be escaped (double quote, single quote, backslash, respectively)
