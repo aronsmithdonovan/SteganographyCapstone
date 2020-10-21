@@ -8,7 +8,7 @@
 from PIL import Image
 from process import *
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### main()
 
 # main
 # uses command line, takes message input and encodes it in an image input
@@ -39,7 +39,7 @@ def main():
     # display encoded image
     enc_image.show()
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### callEncode(message, image_input)
 
 # callEncode
 # calls the encode function with internally provided message and image
@@ -64,7 +64,7 @@ def callEncodeLSB(message, image_input):
     # return statement
     return enc_image, key.decode("utf-8");
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------- ############### encode(image, data)
 
 # encode
 # encodes a list of binary values into an image with the LSB (least significant bit) approach
