@@ -23,9 +23,9 @@ def main():
 
     # print key
     key = encrypted_msg.getKey()
-    print("\nYour generated key is:\n" + 
-            key.decode('utf-8') + 
-            "\n\nSave this key to be able to decrypt your message.")
+    # print("\nYour generated key is:\n" + 
+    #         key.decode('utf-8') + 
+    #         "\n\nSave this key to be able to decrypt your message.")
 
     # take image input
     # print("Enter the name of the image file (include extension)")
@@ -34,13 +34,19 @@ def main():
     image = Image.open(image_file, 'r')
 
     # encode encrypted message in image
-    enc_image = encode(image, encrypted_msg.getBinList())
+    enc_image, edge_key = encode(image, encrypted_msg.getBinList())
+
+    # update key
+    key = str(key.decode("utf-8") + "!" + edge_key)
+    print("\nYour generated key is:\n" + 
+            key + 
+            "\n\nSave this key to be able to decrypt your message.")
 
     # save encoded image
     enc_image.save('encodedCat.png')
 
     # display encoded image
-    enc_image.show()
+    # enc_image.show()
 
 # ------------------------------------------------------------------------------------------- ############### callEncodeChaos(message, image_input)
 
@@ -56,51 +62,67 @@ def callEncodeChaos(message, image_input):
     # save key
     key = encrypted_msg.getKey()
 
-    # take image input
-    image_file = image_input
-    image = Image.open(image_file, 'r')
-
     # encode encrypted message in image
-    enc_image = encode(image, encrypted_msg.getBinList())
+    enc_image, edge_key = encode(image_input, encrypted_msg.getBinList())
+
+    # update key
+    key = str(key.decode("utf-8") + "!" + edge_key)
 
     # return statement
-    return enc_image, key.decode("utf-8")
+    return enc_image, key
 
 # ------------------------------------------------------------------------------------------- ############### encode(image, data)
 
 # encode
 # encodes a list of binary values into the edge pixels of an image using Canny edge detection
 # uses half as many pixels as LSB
-### image: image object
+### image: filepath for input image
 ### data: list of binary values to be encoded into an image
 ### return: encoded image
-def encode(image, data):
+def encode(image_input, data):
     
+    # take image input
+    image_file = image_input
+    image = Image.open(image_file, 'r')
+    # image = Image.open('cat.png', 'r')
+
     # copies input image, convert to RGB
     enc_image = image.copy()
     enc_image = enc_image.convert('RGB')
 
     # initialize arguments
-    msg = data
-    data = ''
+    msg = ''
 
-    for byte in msg:
-        data = data + byte
+    for byte in data:
+        msg = msg + byte
 
     # mark the end of the msg with 16 zeros
-    data = data + '0000000000000000'
+    msg = msg + '0000000000000000'
 
     #determines number of pix necessary for encoding
-    pixnum = int(len(data)/2)
+    pixnum = int(len(msg)/2)
 
     #selects edge pix for encodeding, adds to list
-    edges = cv.Canny(cv.imread('cat.png',0),100,200) # TODO: SHOULD BE IMAGE OR ENC_IMAGE AS PARAM -- Still need to resolve later
+    edges = cv.Canny(cv.imread(image_input, 0),100,200) # TODO: SHOULD BE IMAGE OR ENC_IMAGE AS PARAM -- Still need to resolve later
+    # edges = cv.Canny(cv.imread('cat.png', 0),100,200)
+    
     edge_pix = []
     for i in range(edges.shape[0]):
         for j in range(edges.shape[1]):
             if edges[i,j] != 0:
                 edge_pix.append((i,j))
+    
+    edge_return = ""
+    separator = ", "
+    for i in range(0, pixnum):
+        edge_return += str(edge_pix[i])[1:-1]
+        if i != pixnum:
+            edge_return += separator
 
+    encrypted_edge = EncryptedMessage(edge_return)
+    edge_key = encrypted_edge.getKey().decode("utf-8")
+    edge_enc_msg = encrypted_edge.getString()
+    edge_enc_return = str(edge_key + "!" + edge_enc_msg)
 
     # copies pixel data for input image
     pixels = enc_image.load()
@@ -123,8 +145,8 @@ def encode(image, data):
         a3 = int(b_bit[len(b_bit)-1])
 
 
-        x1 = int(data[k])
-        x2 = int(data[k + 1])
+        x1 = int(msg[k])
+        x2 = int(msg[k + 1])
 
         if (x1 == (a1^a3)) & (x2 == (a2^a3)):
             pass
@@ -142,7 +164,9 @@ def encode(image, data):
         # save updated pixel
         pixels[edge_pix[i][1], edge_pix[i][0]] = (int(r_bit, 2), int(g_bit, 2), int(b_bit, 2))
 
-    return enc_image
+        # save pixel location
+
+    return enc_image, edge_enc_return
 
 # -------------------------------------------------------------------------------------------
 

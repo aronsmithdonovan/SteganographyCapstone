@@ -24,7 +24,7 @@ def main():
     image = Image.open(image_file, 'r')
 
     # decode message from image with key
-    message = decode(image, key)
+    message = decode(image, key, edge_pix)
 
     # print decoded message
     print("\nYour decoded message is: " + message)
@@ -40,10 +40,9 @@ def callDecodeChaos(image_input, key):
 
     # initialize arguments
     key = str(key)
-    image = Image.open(image_input, 'r')
 
     # decrypt message
-    message = decode(image, key)
+    message = decode(image_input, key)
 
     # return statement
     return message
@@ -55,22 +54,24 @@ def callDecodeChaos(image_input, key):
 ### image: image with encoded message
 ### key: key used to encode message
 ### returns: DecryptedMessage file
-def decode(image, key):
+def decode(image_input, key):
+
+    # split key inputs
+    key_list = key.split("!")
+    key = str(key_list[0])
+    dcr_edge = DecryptedMessage(key_list[2], key_list[1]).getString()
+    split_edge = dcr_edge.split(", ")
+    split_edge.pop()
+    for i in range(0, len(split_edge)):
+        split_edge[i] = int(split_edge[i])
+    edge_pix = list(zip(split_edge[::2],split_edge[1::2]))
+    
+    # take image input
+    image = Image.open(image_input, 'r')
 
     # copies pixel data for input image
     image = image.convert('RGB')
     pixels = image.load()
-
-    edges = cv.Canny(cv.imread('cat.png', 0), 100, 200)  # TODO: SHOULD BE IMAGE OR ENC_IMAGE AS PARAM -- still need to resolve later
-
-    edge_pix = []
-
-    for i in range(edges.shape[0]):
-        for j in range(edges.shape[1]):
-            if edges[i, j] != 0:
-                edge_pix.append((i, j))
-
-
 
     message = ''
     stop_decoding = False
@@ -112,7 +113,6 @@ def decode(image, key):
 
     # decrypt message
     message = DecryptedMessage(bin_list, key)
-    # print(message.getString)
 
 
     # return message
