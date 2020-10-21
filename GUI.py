@@ -15,7 +15,10 @@ from decodeChaos import *
 from PIL import ImageTk
 from PIL import Image
 from pathlib import Path
+import os.path
+from os import path
 import itertools
+import random
 
 # ------------------------------------------------------------------------------------------- ############### GUI
 
@@ -41,6 +44,9 @@ class GUI:
         self.DECODE_COLOR = "DarkSeaGreen3"
         self.LSB_COLOR = "goldenrod1"
         self.CHAOS_COLOR = "LightPink1"
+
+        # set random number
+        self.rand = random.randint(0,100)
 
         # -------------------------------------------------------------------------------------------
         
@@ -521,7 +527,7 @@ class GUI:
         self.imageBox.pack()
 
         # display the encryption key
-        self.keyReturn.config(text=str(self.enc_key), font="Arial 12 bold", fg="black") 
+        self.keyReturn.config(text=(str(self.enc_key)[0:25] + "..."), font="Arial 12 bold", fg="black") 
         self.keyReturn.pack(fill=tk.X, side=tk.LEFT)
         
         # update save button
@@ -540,9 +546,9 @@ class GUI:
 
         # decode provided image (text is key input)
         if self.toggleMethodState == self.LSB_STATE:
-            self.enc_image, self.enc_key = callDecodeLSB(self.filepath, self.text)
+            self.dec_msg = callDecodeLSB(self.filepath, self.text)
         elif self.toggleMethodState == self.CHAOS_STATE:
-            self.enc_image, self.enc_key = callDecodeChaos(self.filepath, self.text)
+            self.dec_msg = callDecodeChaos(self.filepath, self.text)
         else:
             self.quit
 
@@ -606,8 +612,11 @@ class GUI:
     def stringToTxt(self):
         
         # set filepath for saved string to be in the same directory as the provided image
-        self.txt_filepath = (str(Path(self.filepath).parent) + 
-                                "\\" + self.txt_filename)
+        self.txt_filepath = (str(Path(self.filepath).parent) + "\\" + self.txt_filename)
+
+        # rename if duplicate
+        if path.exists(self.txt_filepath):
+            self.txt_filepath = str(Path(self.filepath).parent + Path(self.txt_filepath).stem + str(self.rand) + ".txt")
 
         # write text file
         file = open(self.txt_filepath, "x+")
