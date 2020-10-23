@@ -6,7 +6,7 @@
 <br>
 
 ### Documentation:
-This repository contains an application for steganographic encoding of text within an image. Text input, which is either typed into a text box or uploaded as the contents of a .txt file, is encrypted with a symmetric (private-key) method, returning an encrypted token and a key, before being encoded into image data. The key must be provided to retrieve the original message from the image after it has been encoded. The application itself supports both encoding and decoding of images and two different methods of selecting the pixels that are encoded: the Least Significant Bit (LSB) method and the Scatter or Chaos method. The application also allows the user to upload locally stored image and .txt files and to download image and .txt files created by the software (i.e. encoded images, .txt files containing generated encryption keys, and .txt files containing decoded messages). All of the files contained in the *src* folder are equipped to run through the command line, but the user does not have the option to select their own image to be encoded through this channel, which is intended primarily to demonstrate the behavior of each file and not to provide full functionality.
+This repository contains an application for steganographic encoding of text within an image. Text input, which is either typed into a text box or uploaded as the contents of a .txt file, is encrypted with a symmetric (private-key) method, returning an encrypted token and a key, before being encoded into image data. The key must be provided to retrieve the original message from the image after it has been encoded. The application itself supports both encoding and decoding of images and two different methods of selecting the pixels that are encoded: the Least Significant Bit (LSB) method and the Scatter or Chaos method. The application also allows the user to upload locally stored image and .txt files and to download image and .txt files created by the software (i.e. encoded images, .txt files containing generated encryption keys, and .txt files containing decoded messages). All of the files contained in the `src` folder are equipped to run through the command line, but the user does not have the option to select their own image to be encoded through this channel, which is intended primarily to demonstrate the behavior of each file and not to provide full functionality.
 
 This application was completed as the course project for COMP494: Computer Security/Privacy for the fall 2020 semester by Macalester College undergraduate students Colin Kirby, Maddie AlQatami, Aron Smith-Donovan, and Randy Beidelschies under the guidance of Prof. Abigail Marsh. All work on this project was completed independently by the students. The application in conjunction with the report and video demo provided meets the requirements for a capstone project for undergraduates pursuing a Bachelor's in Computer Science.
 
@@ -16,29 +16,25 @@ Special thanks to Prof. Abby, the Python documentation, and the Stack Overflow f
 ***
 <br>
 
-<blockquote>
-
 ### File structure:
 
-<dl>
-  <dt>SteganographyCapstone\</dt>
-   <dd>.gitignore</dd>
-   <dd>README.md</dd>
-   <dd>Steganography.exe</dd>
-   <dd>run.py</dd>
-   <dd>src\</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process.py</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encodeLSB.py</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decodeLSB.py</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encodeChaos.py</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decodeChaos.py</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GUI.py</dd>
-   <dd>img\</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat.png</dd>
-      <dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;icon.ico</dd>
-
-</dl>
-</blockquote>
+```
+  SteganographyCapstone\
+      .gitignore
+      README.md
+      Steganography.exe
+      run.py
+      src\
+         process.py
+         encodeLSB.py
+         decodeLSB.py
+         encodeChaos.py
+         decodeChaos.py
+         GUI.py
+      img\
+         cat.png
+         icon.ico
+```
 <br>
 
 ***
@@ -51,21 +47,21 @@ Special thanks to Prof. Abby, the Python documentation, and the Stack Overflow f
    <blockquote>
 
    **Option 1: running the application with the executable file**<br>
-   The *Steganography.exe* file is compiled with the full capabilities of the application, and can simply be run as a standalone file.
+   The `Steganography.exe` file is compiled with the full capabilities of the application, and can simply be run as a standalone file.
 
    </blockquote>
    <br>
    <blockquote>
 
    **Option 2: running the application with the Python files**<br>
-   Download the repository to a local directory and follow the setup instructions below for installing the necessary packages. The *run.py* file can be run from a text editor or command line to launch the application.
+   Download the repository to a local directory and follow the setup instructions below for installing the necessary packages. The `run.py` file can be run from a text editor or command line to launch the application.
 
    </blockquote>
    <br>
    <blockquote>
 
    **Option 3: running individual Python files**<br>
-   Download the repository to a local directory and follow the setup instructions below for installing the necessary packages. The files contained in the *src* file can all be run from a text editor or command line to demonstrate the behavior of individual methods; this option does not allow for user-provided images to be encoded.
+   Download the repository to a local directory and follow the setup instructions below for installing the necessary packages. The files contained in the `src` file can all be run from a text editor or command line to demonstrate the behavior of individual methods; this option does not allow for user-provided images to be encoded.
 
    </blockquote>
    <br>
