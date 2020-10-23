@@ -1,0 +1,9 @@
+.vscode/settings.json
+__pycache__/process.cpython-38.pyc
+src/__pycache__/decodeChaos.cpython-38.pyc
+src/__pycache__/decodeLSB.cpython-38.pyc
+src/__pycache__/encodeChaos.cpython-38.pyc
+src/__pycache__/encodeLSB.cpython-38.pyc
+src/__pycache__/process.cpython-38.pyc
+src/__pycache__/GUI.cpython-38.pyc
+img/encodedCat.png
