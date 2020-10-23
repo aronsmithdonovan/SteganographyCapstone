@@ -5,10 +5,10 @@
 ***
 <br>
 
-### Documentation:
+### Description:
 This repository contains an application for steganographic encoding of text within an image. Text input, which is either typed into a text box or uploaded as the contents of a .txt file, is encrypted with a symmetric (private-key) method, returning an encrypted token and a key, before being encoded into image data. The key must be provided to retrieve the original message from the image after it has been encoded. The application itself supports both encoding and decoding of images and two different methods of selecting the pixels that are encoded: the Least Significant Bit (LSB) method and the Scatter or Chaos method. The application also allows the user to upload locally stored image and .txt files and to download image and .txt files created by the software (i.e. encoded images, .txt files containing generated encryption keys, and .txt files containing decoded messages). All of the files contained in the `src` folder are equipped to run through the command line, but the user does not have the option to select their own image to be encoded through this channel, which is intended primarily to demonstrate the behavior of each file and not to provide full functionality.
 
-This application was completed as the course project for COMP494: Computer Security/Privacy for the fall 2020 semester by Macalester College undergraduate students Colin Kirby, Maddie AlQatami, Aron Smith-Donovan, and Randy Beidelschies under the guidance of Prof. Abigail Marsh. All work on this project was completed independently by the students. The application in conjunction with the report and video demo provided meets the requirements for a capstone project for undergraduates pursuing a Bachelor's in Computer Science.
+This application was completed as the course project for COMP494: Computer Security/Privacy for the fall 2020 semester by Macalester College undergraduate students Colin Kirby, Maddie AlQatami, Aron Smith-Donovan, and Randy Beidelschies under the guidance of Prof. Abigail Marsh. All work on this project was completed independently by the students. The application in conjunction with the written report and video demo provided in the `report` folder meet the requirements for a capstone project for undergraduates pursuing a Bachelor's in Computer Science.
 
 Special thanks to Prof. Abby, the Python documentation, and the Stack Overflow forums.
 <br>
@@ -34,6 +34,10 @@ Special thanks to Prof. Abby, the Python documentation, and the Stack Overflow f
       img\
          cat.png
          icon.ico
+      report\
+         app-demo-1.mp4
+         app-demo-2.mp4
+         report.pdf
 ```
 <br>
 
