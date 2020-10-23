@@ -1,4 +1,4 @@
-# stegGUI.py
+# GUI.py
 # 
 # handles GUI components
 # 
